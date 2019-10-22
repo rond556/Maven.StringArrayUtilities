@@ -1,9 +1,7 @@
 package com.zipcodewilmington;
 
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by leon on 1/29/18.
@@ -48,6 +46,7 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean contains(String[] array, String value) {
         for(int i = 0; i <= array.length - 1; i++) {
+            //only finding the value once is necessary since we then know it is included
             if (array[i].equals(value)) {
                 return true;
                 }
@@ -143,7 +142,7 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
         //make a list since you'll have to change the length
-        List<String> removedArray = new ArrayList<>();
+        List<String> removedString = new ArrayList<>();
         //create a counter that matches how many times
         int valueCounter = 0;
         //run a forEach loop checking each String within the array
@@ -151,7 +150,7 @@ public class StringArrayUtils {
             //if the current value is NOT equal to the valueToRemove
             if (!valueToRemove.equals(value)) {
                 //add it to your list
-                removedArray.add(value);
+                removedString.add(value);
             } else {
                 //up your counter
                 valueCounter++;
@@ -163,10 +162,9 @@ public class StringArrayUtils {
         it will be that much shorter.
         our tests are always equal to one, but other examples beyond our test
         might have more than one occurrence*/
-
-        String[] removedArrayArray = new String[array.length - valueCounter];
+        String[] finalArray = new String[array.length - valueCounter];
         //convert your new list back into an array and return it
-        return removedArray.toArray(removedArrayArray);
+        return removedString.toArray(finalArray);
     }
 
     /**
@@ -174,8 +172,39 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        //create a list
+        List<String> removedString = new ArrayList<>();
+        //create a counter for value
+        int valueCounter = 0;
+        for (int i = 0; i <= array.length - 2; i++) {
+            //if the current value is equal to the next value
+            if (!array[i].equals(array[i + 1])) {
+                //add the value to the list
+                removedString.add(array[i]);
+                //add to your valueCounter
+                valueCounter++;
+            }
+        }
+
+        //create an array to set your String equal to
+        String[] finalArray = new String[array.length - valueCounter];
+        //convert your new list back into an array and return it
+        System.out.println(Arrays.toString(removedString.toArray(finalArray)));
+        return removedString.toArray(finalArray);
     }
+        /*This does not work because it removes ALL duplicates, not just consecutive ones
+        Still, it is interesting and worth keeping around thanks to alumni help
+
+        create an empty Set
+        Set<String> removedSet = new LinkedHashSet<>();
+        //create a for loop to search through the array
+        removedSet.addAll(Arrays.asList(array));
+
+        String[] finalArray = new String[removedSet.size()];
+        return removedSet.toArray(finalArray);*/
+
+
+
 
     /**
      * @param array array of chars
