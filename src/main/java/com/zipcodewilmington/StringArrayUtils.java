@@ -1,5 +1,8 @@
 package com.zipcodewilmington;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -48,6 +51,8 @@ public class StringArrayUtils {
                 }
             }
         return false;
+        //List<String> arrayList = Arrays.asList(array);
+        //return arrayList.contains(value);
     }
 
     /**
@@ -55,14 +60,29 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        String[] reversedArray = new String[array.length - 1];
+        int arrayCounter = 0;
+        for(int i = array.length - 1; i >= 0; i--){
+            reversedArray[i] = array[arrayCounter];
+            arrayCounter++;
+        }
+        return reversedArray;
+        
+        //List<String> arrayList = Arrays.asList(array);
+        //return arrayList.reverse();
     }
 
     /**
      * @param array array of String objects
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
-    public static boolean isPalindromic(String[] array) {
+    public static boolean isPalindromic(String[] array) { 
+        int backwardsCounter = array.length - 1;
+        for(int i = 0; i <= array.length - 1; i++){
+            if(array[i].equals(array[backwardsCounter])){
+                return true;
+            }
+        }
         return false;
     }
 
