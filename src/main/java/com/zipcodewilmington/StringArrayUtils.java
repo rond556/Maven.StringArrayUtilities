@@ -60,11 +60,15 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        String[] reversedArray = new String[array.length - 1];
-        int arrayCounter = 0;
-        for(int i = array.length - 1; i >= 0; i--){
-            reversedArray[i] = array[arrayCounter];
-            arrayCounter++;
+        //create a new array that you intend to be reversed
+        String[] reversedArray = new String[array.length];
+        //create a decling counter that starts the the length of the array - 1
+        int decliningCounter = array.length - 1;
+        for(int i = 0; i <= array.length - 1; i++){
+            //move through the array and add the value at the declining counter position to the reversed array
+            reversedArray[i] = array[decliningCounter];
+            //decline the declining counter
+            decliningCounter--;
         }
         return reversedArray;
         
@@ -76,10 +80,12 @@ public class StringArrayUtils {
      * @param array array of String objects
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
-    public static boolean isPalindromic(String[] array) { 
-        int backwardsCounter = array.length - 1;
+    public static boolean isPalindromic(String[] array) {
+        //create a declining counter
+        int decliningCounter = array.length - 1;
         for(int i = 0; i <= array.length - 1; i++){
-            if(array[i].equals(array[backwardsCounter])){
+            //test if the position of i and decliningCounter in the array are the same
+            if(array[i].equals(array[decliningCounter])){
                 return true;
             }
         }
@@ -91,7 +97,23 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        //create an array of UPPERCASE and LOWERCASE alphabet
+        String[] alpha = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+                "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};;
+        //turn the array into an String, remove the spaces, and change everything to a lower case
+        String arrayString = String.join(" ",array).replaceAll(" ","").toLowerCase();
+
+        //search through the alphabet array
+        for(int i = 0; i <= alpha.length - 1; i++){
+            //see if the array list DOESN'T contain the current letter
+            //arrayString.contains(alpha[i]) returns an error, but indexOf(alpha[i]) = -1 does not
+            if(arrayString.indexOf(alpha[i]) == -1){
+                //return false if it does not
+                return false;
+            }
+        }
+        //if the loop finishes without returning false, return true;
+        return true;
     }
 
     /**
@@ -100,7 +122,16 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        //create occurrence counter
+        int occurrenceCounter = 0;
+        for(int i = 0; i <= array.length - 1;i++){
+            //test if the value at i is equal to the value you are looking for
+            if(array[i].equals(value)){
+                //add to the occurrence counter if it does
+                occurrenceCounter++;
+            }
+        }
+        return occurrenceCounter;
     }
 
     /**
