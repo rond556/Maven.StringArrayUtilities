@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -140,8 +142,47 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        //make a list since you'll have to change the length
+        List<String> removedArray = new ArrayList<>();
+        //create a counter that matches how many times
+        int valueCounter = 0;
+        //run a forEach loop checking each String within the array
+        for (String value : array) {
+            //if the current value is NOT equal to the valueToRemove
+            if (!valueToRemove.equals(value)) {
+                //add it to your list
+                removedArray.add(value);
+            } else {
+                //up your counter
+                valueCounter++;
+            }
+        }
+        /*initialize a new array that you want your list to be converted into
+        the dimensions will be equal to the length of the original array
+        minus the number of times valueToRemove appeared, seeing that
+        it will be that much shorter.
+        our tests are always equal to one, but other examples beyond our test
+        might have more than one occurrence*/
+
+        String[] removedArrayArray = new String[array.length - valueCounter];
+        //convert your new list back into an array and return it
+        return removedArray.toArray(removedArrayArray);
     }
+
+
+        /*//create a new array to be returned
+        String[] removedArray = new String[array.length];
+        for(int i = 0 ; i <= array.length - 1; i++){
+            //move through the array and if the value of i does NOT equal the valueToRemove
+            if(!array[i].equals(valueToRemove)){
+                //set the value of removedArray equal to the value of the array
+                removedArray[i] = array[i];
+            }
+        }
+        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(removedArray));
+        return null;*/
+
 
     /**
      * @param array array of chars
