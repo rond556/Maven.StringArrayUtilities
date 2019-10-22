@@ -169,21 +169,6 @@ public class StringArrayUtils {
         return removedArray.toArray(removedArrayArray);
     }
 
-
-        /*//create a new array to be returned
-        String[] removedArray = new String[array.length];
-        for(int i = 0 ; i <= array.length - 1; i++){
-            //move through the array and if the value of i does NOT equal the valueToRemove
-            if(!array[i].equals(valueToRemove)){
-                //set the value of removedArray equal to the value of the array
-                removedArray[i] = array[i];
-            }
-        }
-        System.out.println(Arrays.toString(array));
-        System.out.println(Arrays.toString(removedArray));
-        return null;*/
-
-
     /**
      * @param array array of chars
      * @return array of Strings with consecutive duplicates removes
