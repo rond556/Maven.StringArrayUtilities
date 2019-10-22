@@ -108,8 +108,8 @@ public class StringArrayUtils {
         //search through the alphabet array
         for(int i = 0; i <= alpha.length - 1; i++){
             //see if the array list DOESN'T contain the current letter
-            //arrayString.contains(alpha[i]) returns an error, but indexOf(alpha[i]) = -1 does not
-            if(arrayString.indexOf(alpha[i]) == -1){
+            //arrayString.indexOf(alpha[i]) == -1 also works since indexOf() = -1 means the value is not in the array
+            if(!arrayString.contains(alpha[i])){
                 //return false if it does not
                 return false;
             }
