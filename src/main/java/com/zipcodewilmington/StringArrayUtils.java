@@ -36,7 +36,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return array[array.length -2];
+        return array[array.length - 2];
     }
 
     /**
@@ -45,12 +45,12 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        for(int i = 0; i <= array.length - 1; i++) {
+        for (int i = 0; i <= array.length - 1; i++) {
             //only finding the value once is necessary since we then know it is included
             if (array[i].equals(value)) {
                 return true;
-                }
             }
+        }
         return false;
         //List<String> arrayList = Arrays.asList(array);
         //return arrayList.contains(value);
@@ -65,14 +65,14 @@ public class StringArrayUtils {
         String[] reversedArray = new String[array.length];
         //create a decling counter that starts the the length of the array - 1
         int decliningCounter = array.length - 1;
-        for(int i = 0; i <= array.length - 1; i++){
+        for (int i = 0; i <= array.length - 1; i++) {
             //move through the array and add the value at the declining counter position to the reversed array
             reversedArray[i] = array[decliningCounter];
             //decline the declining counter
             decliningCounter--;
         }
         return reversedArray;
-        
+
         //List<String> arrayList = Arrays.asList(array);
         //return arrayList.reverse();
     }
@@ -84,9 +84,9 @@ public class StringArrayUtils {
     public static boolean isPalindromic(String[] array) {
         //create a declining counter
         int decliningCounter = array.length - 1;
-        for(int i = 0; i <= array.length - 1; i++){
+        for (int i = 0; i <= array.length - 1; i++) {
             //test if the position of i and decliningCounter in the array are the same
-            if(array[i].equals(array[decliningCounter])){
+            if (array[i].equals(array[decliningCounter])) {
                 return true;
             }
         }
@@ -100,15 +100,16 @@ public class StringArrayUtils {
     public static boolean isPangramic(String[] array) {
         //create an array of UPPERCASE and LOWERCASE alphabet
         String[] alpha = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
-                "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};;
+                "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        ;
         //turn the array into an String, remove the spaces, and change everything to a lower case
-        String arrayString = String.join(" ",array).replaceAll(" ","").toLowerCase();
+        String arrayString = String.join(" ", array).replaceAll(" ", "").toLowerCase();
 
         //search through the alphabet array
-        for(int i = 0; i <= alpha.length - 1; i++){
+        for (int i = 0; i <= alpha.length - 1; i++) {
             //see if the array list DOESN'T contain the current letter
             //arrayString.indexOf(alpha[i]) == -1 also works since indexOf() = -1 means the value is not in the array
-            if(!arrayString.contains(alpha[i])){
+            if (!arrayString.contains(alpha[i])) {
                 //return false if it does not
                 return false;
             }
@@ -125,9 +126,9 @@ public class StringArrayUtils {
     public static int getNumberOfOccurrences(String[] array, String value) {
         //create occurrence counter
         int occurrenceCounter = 0;
-        for(int i = 0; i <= array.length - 1;i++){
+        for (int i = 0; i <= array.length - 1; i++) {
             //test if the value at i is equal to the value you are looking for
-            if(array[i].equals(value)){
+            if (array[i].equals(value)) {
                 //add to the occurrence counter if it does
                 occurrenceCounter++;
             }
@@ -174,22 +175,22 @@ public class StringArrayUtils {
     public static String[] removeConsecutiveDuplicates(String[] array) {
         //create a list
         List<String> removedString = new ArrayList<>();
-        //create a counter for value
-        int valueCounter = 0;
-        for (int i = 0; i <= array.length - 2; i++) {
-            //if the current value is equal to the next value
-            if (!array[i].equals(array[i + 1])) {
-                //add the value to the list
+        //create a valueCounter
+        int valueCounter= 1;
+        //add the first element of the array to the list since it is ALWAYS guaranteed to be in there
+        removedString.add(array[0]);
+        //move through the array starting at 1 since we already added element zero
+        for(int i = 1 ; i <= array.length - 1;i++){
+            //check to see if the current position is NOT equal to the previous
+            if(!array[i].equals(array[i - 1])) {
+                //if it's not, add the element to the array
                 removedString.add(array[i]);
-                //add to your valueCounter
+                //add your valueCounter
                 valueCounter++;
             }
         }
-
-        //create an array to set your String equal to
         String[] finalArray = new String[array.length - valueCounter];
         //convert your new list back into an array and return it
-        System.out.println(Arrays.toString(removedString.toArray(finalArray)));
         return removedString.toArray(finalArray);
     }
         /*This does not work because it removes ALL duplicates, not just consecutive ones
@@ -204,15 +205,36 @@ public class StringArrayUtils {
         return removedSet.toArray(finalArray);*/
 
 
-
-
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        //create a list
+        List<String> removedString = new ArrayList<>();
+        //create a valueCounter
+        int valueCounter = 0;
+        for(int i = 0; i <= array.length; i++){
+            //create a temporary string to assign values to
+            String tempString = "";
+            //add the first character of the array to the temporary string
+            tempString += array[i];
+            //create a while loop that adds to the string as long as the element is equal
+            // to the first character in the string
+                //create a counter for our while loop
+                int tempCounter = 0;
+                while(array[tempCounter].equals(tempString.charAt(0)))
+                    tempString += array[i];
+                    tempCounter++;
+                    valueCounter++;
+                    //break the the elements are not equal
+                    if(!array[tempCounter].equals(tempString.charAt(0)))
+                        break;
+                    //outside the while, add the new temp string to the list
+                        removedString.add(tempString);
+        }
+        String[] finalArray = new String[array.length - valueCounter];
+        //convert your new list back into an array and return it
+        return removedString.toArray(finalArray);
     }
-
-
 }
