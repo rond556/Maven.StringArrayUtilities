@@ -61,7 +61,13 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        //create a new array that you intend to be reversed
+        List<String> reverseList = Arrays.asList(array);
+        Collections.reverse(reverseList);
+        return reverseList.toArray(new String[reverseList.size()]);
+    }
+
+
+        /*//create a new array that you intend to be reversed
         String[] reversedArray = new String[array.length];
         //create a decling counter that starts the the length of the array - 1
         int decliningCounter = array.length - 1;
@@ -75,7 +81,8 @@ public class StringArrayUtils {
 
         //List<String> arrayList = Arrays.asList(array);
         //return arrayList.reverse();
-    }
+    }*/
+
 
     /**
      * @param array array of String objects
@@ -95,10 +102,7 @@ public class StringArrayUtils {
         return Arrays.equals(array, reverseArray);
     }
 
-    /*iffor(int i = 0; i <= array.length; i++)
-    (!array[i].equals(array[(array.length - 1) -i]))
-    return false
-     */
+
 
     /**
      * @param array array of String objects
@@ -182,8 +186,6 @@ public class StringArrayUtils {
     public static String[] removeConsecutiveDuplicates(String[] array) {
         //create a list
         List<String> removedString = new ArrayList<>();
-        //create a valueCounter
-        int valueCounter= 1;
         //add the first element of the array to the list since it is ALWAYS guaranteed to be in there
         removedString.add(array[0]);
         //move through the array starting at 1 since we already added element zero
@@ -192,12 +194,8 @@ public class StringArrayUtils {
             if(!array[i].equals(array[i - 1])) {
                 //if it's not, add the element to the array
                 removedString.add(array[i]);
-                //add your valueCounter
-                valueCounter++;
             }
         }
-        String[] finalArray = new String[array.length - valueCounter];
-        //convert your new list back into an array and return it
         return removedString.toArray(new String[removedString.size()]);
     }
         /*This does not work because it removes ALL duplicates, not just consecutive ones
@@ -234,7 +232,6 @@ public class StringArrayUtils {
                 //change the value of temp string to the new non-consecutive value
                 tempString = array[i];
             }
-            System.out.println(tempString);
         }
         //add the final value to your array
         removedString.add(tempString);
