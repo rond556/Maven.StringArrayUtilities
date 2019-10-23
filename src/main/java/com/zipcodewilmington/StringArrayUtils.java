@@ -82,15 +82,17 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        //create a declining counter
-        int decliningCounter = array.length - 1;
-        for (int i = 0; i <= array.length - 1; i++) {
-            //test if the position of i and decliningCounter in the array are the same
-            if (array[i].equals(array[decliningCounter])) {
-                return true;
-            }
+        //create a String array intended to reverse
+        String[] reverseArray = new String[array.length];
+        //create a int to count up through array
+        int valueCounter = 0;
+        //use a forloop backwards through the array to create the reverse string
+        for (int i = array.length - 1; i >= 0; i--) {
+            reverseArray[i] = (array[valueCounter]);
+            valueCounter++;
         }
-        return false;
+
+        return Arrays.equals(array, reverseArray);
     }
 
     /**
@@ -231,7 +233,7 @@ public class StringArrayUtils {
                     if(!array[tempCounter].equals(tempString.charAt(0)))
                         break;
                     //outside the while, add the new temp string to the list
-                        removedString.add(tempString);
+            removedString.add(tempString);
         }
         String[] finalArray = new String[array.length - valueCounter];
         //convert your new list back into an array and return it
