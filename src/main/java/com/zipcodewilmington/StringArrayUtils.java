@@ -95,6 +95,11 @@ public class StringArrayUtils {
         return Arrays.equals(array, reverseArray);
     }
 
+    /*iffor(int i = 0; i <= array.length; i++)
+    (!array[i].equals(array[(array.length - 1) -i]))
+    return false
+     */
+
     /**
      * @param array array of String objects
      * @return true if each letter in the alphabet has been used in the array
@@ -193,7 +198,7 @@ public class StringArrayUtils {
         }
         String[] finalArray = new String[array.length - valueCounter];
         //convert your new list back into an array and return it
-        return removedString.toArray(finalArray);
+        return removedString.toArray(new String[removedString.size()]);
     }
         /*This does not work because it removes ALL duplicates, not just consecutive ones
         Still, it is interesting and worth keeping around thanks to alumni help
@@ -214,29 +219,26 @@ public class StringArrayUtils {
     public static String[] packConsecutiveDuplicates(String[] array) {
         //create a list
         List<String> removedString = new ArrayList<>();
-        //create a valueCounter
-        int valueCounter = 0;
-        for(int i = 0; i <= array.length; i++){
-            //create a temporary string to assign values to
-            String tempString = "";
-            //add the first character of the array to the temporary string
-            tempString += array[i];
-            //create a while loop that adds to the string as long as the element is equal
-            // to the first character in the string
-                //create a counter for our while loop
-                int tempCounter = 0;
-                while(array[tempCounter].equals(tempString.charAt(0)))
-                    tempString += array[i];
-                    tempCounter++;
-                    valueCounter++;
-                    //break the the elements are not equal
-                    if(!array[tempCounter].equals(tempString.charAt(0)))
-                        break;
-                    //outside the while, add the new temp string to the list
-            removedString.add(tempString);
+        //create a temporary string to assign values to
+        //assign the first value to it to start
+        String tempString = array[0];
+        //start from 1 in the for loop since we've already looked at the first value
+        for(int i = 1; i <= array.length; i++){
+            //test to see if the current value in the array is equal to the previous
+            if(array[i].equals(array[i - 1])){
+                //if they are equals, all the value to the temp string
+                tempString += array[i];
+                } else {
+                //if they are not equal, add it to the list
+                removedString.add(tempString);
+                //change the value of temp string to the new non-consecutive value
+                tempString = array[i];
+            }
+            System.out.println(tempString);
         }
-        String[] finalArray = new String[array.length - valueCounter];
-        //convert your new list back into an array and return it
-        return removedString.toArray(finalArray);
+        //add the final value to your array
+        removedString.add(tempString);
+        //return the final list converted into an array
+        return removedString.toArray(new String[removedString.size()]);
     }
 }
